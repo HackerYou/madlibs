@@ -415,3 +415,7 @@ body {
     padding: 5px 10px; }
     .edit-toggles a.selected {
       background-color: darkblue; }
+
+.error {
+  color: red;
+  font-weight: bold; }

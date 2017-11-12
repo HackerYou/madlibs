@@ -24,24 +24,75 @@ mongoose.connect("mongodb://localhost/madlibs");
 // by passing an object where the keys are the field names you want in your
 // model and the values are the type of data.
 const WordsSchema = new mongoose.Schema({
-  number_1: Number,
-  foreign_country: String,
-  adverb: String,
-  ing_verb_1: String,
-  body_part_1: String,
-  plural_noun_1: String,
-  building: String,
-  adjective: String,
-  body_part_2: String,
-  body_part_2: String,
-  plural_noun_3: String,
-  ing_verb_2: String,
-  number_2: Number,
-  plural_noun_4: String,
-  verb: String,
-  plural_noun_3: String,
-  language: String,
-  noun: String
+  number_1: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 10
+  },
+  foreign_country: {
+    type: String,
+    required: true,
+    enum: ['USA', 'India', 'China', 'England']
+  },
+  adverb: {
+    type: String,
+    required: true
+  },
+  ing_verb_1: {
+    type: String,
+    required: true
+  },
+  body_part_1: {
+    type: String,
+    required: true
+  },
+  plural_noun_1: {
+    type: String,
+    required: true
+  },
+  building: {
+    type: String,
+    required: true
+  },
+  adjective: {
+    type: String,
+    required: true
+  },
+  body_part_2: {
+    type: String,
+    required: true
+  },
+  plural_noun_3: {
+    type: String,
+    required: true
+  },
+  ing_verb_2: {
+    type: String,
+    required: true
+  },
+  number_2: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 200
+  },
+  plural_noun_4: {
+    type: String,
+    required: true
+  },
+  verb: {
+    type: String,
+    required: true
+  },
+  language: {
+    type: String,
+    required: true
+  },
+  noun: {
+    type: String,
+    required: true
+  }
 });
 
 // Initialize a model based on the schema we just defined. `Words` will
@@ -73,8 +124,12 @@ app.put('/words', function(req, res, next) {
     Object.assign(words, req.body);
 
     // Save the words to the database
-    words.save().then(() => res.send("OK")));
-  });
+    words.save().then(() => res.send("OK"))
+                .catch((err) => {
+                  res.status(422);
+                  res.send(err);
+                })
+  })
 });
 
 // This route serves your index.html file (which

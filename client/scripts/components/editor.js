@@ -22,13 +22,26 @@ class Editor extends React.Component {
     this.nounChanged = this.nounChanged.bind(this);
   }
 
+
   render() {
+      console.log(this.props.errors);
       const { words } = this.props;
+      let errors = {};
+      if (this.props.errors) {
+        errors = this.props.errors.errors;
+      }
+      console.log(errors);
+
       return <div>
-        <Field label="Number" value={ words.number_1 } onChange={ this.number1Changed } />
-        <Field label="Foreign Country" value={ words.foreign_country } onChange={ this.foreignCountryChanged } />
-        <Field label="Adverb" value={ words.adverb } onChange={ this.adverbChanged } />
-        <Field label="Verb ending in ing" value={ words.ing_verb_1 } onChange={ this.ingVerb1Changed } />
+        {
+          this.props.errors ? <div className='error'>There were some errors saving your madlibs!</div> :
+                              null
+        }
+
+        <Field label="Number" error={ errors.number_1 } value={ words.number_1 } onChange={ this.number1Changed } />
+        <Field label="Foreign Country" error={ errors.foreign_country } value={ words.foreign_country } onChange={ this.foreignCountryChanged } />
+        <Field label="Adverb" error={ errors.adverb } value={ words.adverb } onChange={ this.adverbChanged } />
+        <Field label="Verb ending in ing" error={ errors.ing_verb_1 } value={ words.ing_verb_1 } onChange={ this.ingVerb1Changed } />
         <Field label="Body Part" value={ words.body_part_1 } onChange={ this.bodyPartChanged } />
         <Field label="Plural Noun" value={ words.plural_noun_1 } onChange={ this.pluralNounChanged } />
         <Field label="Type of Building" value={ words.building } onChange={ this.buildingChanged } />

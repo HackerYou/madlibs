@@ -27,7 +27,8 @@ class MadLibs extends React.Component {
         language: '',
         noun: '',
       },
-      mode: 'edit'
+      mode: 'edit',
+      errors: null
     }
     this.toggleMode = this.toggleMode.bind(this);
     this.wordUpdated = this.wordUpdated.bind(this);
@@ -35,13 +36,13 @@ class MadLibs extends React.Component {
   }
 
   render() {
-    const { mode, words } = this.state
+    const { mode, words, errors } = this.state;
 
     return <div>
       <EditToggle mode={ mode } onChange={ this.toggleMode } />
       {
         mode === 'edit' ?
-          <Editor words={ words } onChange={ this.wordUpdated } onSave={ this.save } /> : 
+          <Editor words={ words } errors={ errors } onChange={ this.wordUpdated } onSave={ this.save } /> : 
           <Viewer words={ words } />
       }
     </div>
@@ -67,8 +68,13 @@ class MadLibs extends React.Component {
       body: JSON.stringify(this.state.words)
     })
     .then(res => {
-      this.refresh();
-      this.toggleMode('view');
+      if (res.ok) {
+        this.refresh();
+        this.toggleMode('view');
+      } else {
+        window.scrollTo(0,0);
+        res.json().then(errors => this.setState({ errors }))
+      }
     })
   }
 
