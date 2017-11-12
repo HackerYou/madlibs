@@ -41,6 +41,8 @@ class Editor extends React.Component {
         <Field label="Verb" value={ words.verb } onChange={ this.verbChanged } />
         <Field label="Language" value={ words.language } onChange={ this.languageChanged } />
         <Field label="Noun" value={ words.noun } onChange={ this.nounChanged } />
+
+        <button onClick={ this.props.onSave }>Save</button>
       </div>
     }
 

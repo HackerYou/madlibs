@@ -1,6 +1,9 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
 
 // This serves all files placed in the /public
 // directory (where gulp will build all React code)
@@ -14,6 +17,8 @@ app.use(express.static('assets'));
 // route below)
 
 const mongoose = require('mongoose');
+
+mongoose.connect("mongodb://localhost/madlibs");
 
 // Define a schema for Words. Schemas are defined
 // by passing an object where the keys are the field names you want in your
@@ -45,30 +50,32 @@ const Words = mongoose.model("Word", WordsSchema);
 
 // Retrieve all words from the system
 app.get('/words', function(req, res, next) {
-
+  console.log("getting words");
   // Try to find a words model from the database. Since we'll only
   // ever have one, we can just call `findOne` and return whatever
   // it gives us.
   Words.findOne().then(words => {
     // If we don't have anything in the database, return a new model.
     if (!words) { words = new Words(); }
-    console.log(words);
+    console.log("getting words", words);
     // Send the JSON representation of words.
     res.send(words);
-  });
+  }).catch((err) => console.log(err));
 });
 
 // Update the words in our system.
 app.put('/words', function(req, res, next) {
-  const words = Words.findOne();
-  if (!words) { words = new Words(); }
+  Words.findOne().then(words => {
+    if (!words) { words = new Words(); }
 
-  // Object.assign takes all of the fields of req.body.words, and adds
-  // them to words.
-  Object.assign(words, req.body.words);
-
-  // Save the words to the database
-  words.save().then(() => res.send("OK"));
+    // Object.assign takes all of the fields of req.body, and adds
+    // them to words.
+    Object.assign(words, req.body);
+    
+    // Save the words to the database
+    words.save().then(() => res.send("OK")).catch(err => console.log(err));
+  })
+  .catch(err => console.log(err));
 });
 
 // This route serves your index.html file (which

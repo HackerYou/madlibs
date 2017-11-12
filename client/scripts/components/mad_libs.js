@@ -57,7 +57,7 @@ class MadLibs extends React.Component {
     this.setState({ words: words });
   }
 
-  save(field, value) {
+  save() {
     fetch('/words', {
       headers: {
         'Accept': 'application/json',
