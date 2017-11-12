@@ -60,7 +60,7 @@ app.get('/words', function(req, res, next) {
     console.log("getting words", words);
     // Send the JSON representation of words.
     res.send(words);
-  }).catch((err) => console.log(err));
+  });
 });
 
 // Update the words in our system.
@@ -71,11 +71,10 @@ app.put('/words', function(req, res, next) {
     // Object.assign takes all of the fields of req.body, and adds
     // them to words.
     Object.assign(words, req.body);
-    
+
     // Save the words to the database
-    words.save().then(() => res.send("OK")).catch(err => console.log(err));
-  })
-  .catch(err => console.log(err));
+    words.save().then(() => res.send("OK")));
+  });
 });
 
 // This route serves your index.html file (which
