@@ -5,6 +5,7 @@ import EditToggle from './edit_toggle';
 
 class MadLibs extends React.Component {
   constructor() {
+    super();
     this.state = {
       words: {
         number_1: '',
@@ -28,6 +29,9 @@ class MadLibs extends React.Component {
       },
       mode: 'edit'
     }
+    this.toggleMode = this.toggleMode.bind(this);
+    this.wordUpdated = this.wordUpdated.bind(this);
+    this.save = this.save.bind(this);
   }
 
   render() {
@@ -76,7 +80,7 @@ class MadLibs extends React.Component {
       }
     })
     .then(res => res.json())
-    .then(words => this.setState({ words: words ));
+    .then(words => this.setState({ words: words }));
   }
 
   componentDidMount() {

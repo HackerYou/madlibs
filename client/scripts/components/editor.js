@@ -1,7 +1,28 @@
 import React from 'react';
+import Field from './field';
 
 class Editor extends React.Component {
-    render() {
+  constructor() {
+    super();
+    this.number1Changed = this.number1Changed.bind(this);
+    this.foreignCountryChanged = this.foreignCountryChanged.bind(this);
+    this.adverbChanged = this.adverbChanged.bind(this);
+    this.ingVerb1Changed = this.ingVerb1Changed.bind(this);
+    this.bodyPartChanged = this.bodyPartChanged.bind(this);
+    this.pluralNounChanged = this.pluralNounChanged.bind(this);
+    this.buildingChanged = this.buildingChanged.bind(this);
+    this.adjectiveChanged = this.adjectiveChanged.bind(this);
+    this.bodyPart2Changed = this.bodyPart2Changed.bind(this);
+    this.pluralNoun3Changed = this.pluralNoun3Changed.bind(this);
+    this.ingVerg2Changed = this.ingVerg2Changed.bind(this);
+    this.number2Changed = this.number2Changed.bind(this);
+    this.pluralNoun4Changed = this.pluralNoun4Changed.bind(this);
+    this.verbChanged = this.verbChanged.bind(this);
+    this.languageChanged = this.languageChanged.bind(this);
+    this.nounChanged = this.nounChanged.bind(this);
+  }
+
+  render() {
       const { words } = this.props;
       return <div>
         <Field label="Number" value={ words.number_1 } onChange={ this.number1Changed } />

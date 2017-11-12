@@ -49,13 +49,13 @@ app.get('/words', function(req, res, next) {
   // Try to find a words model from the database. Since we'll only
   // ever have one, we can just call `findOne` and return whatever
   // it gives us.
-  const words = Words.findOne();
-
-  // If we don't have anything in the database, return a new model.
-  if (!words) { words = new Words(); }
-
-  // Send the JSON representation of words.
-  res.send(words);
+  Words.findOne().then(words => {
+    // If we don't have anything in the database, return a new model.
+    if (!words) { words = new Words(); }
+    console.log(words);
+    // Send the JSON representation of words.
+    res.send(words);
+  });
 });
 
 // Update the words in our system.

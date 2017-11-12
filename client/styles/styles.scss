@@ -1,1 +1,29 @@
 @import 'normalize';
+
+body {
+  padding: 40px;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.field {
+  label { display: block; }
+  input { display: block; }
+  margin-bottom: 10px;
+}
+
+.edit-toggles {
+  margin-bottom: 20px;
+  a {
+    margin-right: 20px;
+    background-color: darkgrey;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 5px 10px;
+
+    &.selected {
+      background-color: darkblue;
+    }
+  }
+}

@@ -1,10 +1,16 @@
 import React from 'react';
 
 class EditToggle extends React.Component {
+    constructor() {
+        super();
+        this.toggleEdit = this.toggleEdit.bind(this);
+        this.toggleView = this.toggleView.bind(this);
+    }
+
     render() {
-        return <div>
-            <a href='#' onClick={ this.toggleEdit }>Edit</a>
-            <a href='#' onClick={ this.toggleView }>View</a>
+        return <div className='edit-toggles'>
+            <a href='#' className={ this.props.mode == 'edit' ? 'selected' : '' } onClick={ this.toggleEdit }>Edit</a>
+            <a href='#' className={ this.props.mode == 'view' ? 'selected' : '' } onClick={ this.toggleView }>View</a>
         </div>
     }
 
