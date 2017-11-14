@@ -69,7 +69,8 @@ const WordsSchema = new mongoose.Schema({
   },
   ing_verb_2: {
     type: String,
-    required: true
+    required: true,
+    match: /^.*ing$/
   },
   number_2: {
     type: Number,
@@ -79,7 +80,8 @@ const WordsSchema = new mongoose.Schema({
   },
   plural_noun_4: {
     type: String,
-    required: true
+    required: true,
+    match: /^.*s$/
   },
   verb: {
     type: String,

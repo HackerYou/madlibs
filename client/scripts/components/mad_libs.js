@@ -69,6 +69,7 @@ class MadLibs extends React.Component {
     })
     .then(res => {
       if (res.ok) {
+        this.setState({ errors: null });
         this.refresh();
         this.toggleMode('view');
       } else {

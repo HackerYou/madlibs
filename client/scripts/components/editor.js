@@ -30,7 +30,6 @@ class Editor extends React.Component {
       if (this.props.errors) {
         errors = this.props.errors.errors;
       }
-      console.log(errors);
 
       return <div>
         {
@@ -38,25 +37,34 @@ class Editor extends React.Component {
                               null
         }
 
-        <Field label="Number" error={ errors.number_1 } value={ words.number_1 } onChange={ this.number1Changed } />
+        <Field label="Number"
+          isRequired={ true }
+          error={ errors.number_1 }
+          value={ words.number_1 }
+          onChange={ (e) => this.fieldUpdated("number_1", e.target.value) } />
+
         <Field label="Foreign Country" error={ errors.foreign_country } value={ words.foreign_country } onChange={ this.foreignCountryChanged } />
         <Field label="Adverb" error={ errors.adverb } value={ words.adverb } onChange={ this.adverbChanged } />
         <Field label="Verb ending in ing" error={ errors.ing_verb_1 } value={ words.ing_verb_1 } onChange={ this.ingVerb1Changed } />
-        <Field label="Body Part" value={ words.body_part_1 } onChange={ this.bodyPartChanged } />
-        <Field label="Plural Noun" value={ words.plural_noun_1 } onChange={ this.pluralNounChanged } />
-        <Field label="Type of Building" value={ words.building } onChange={ this.buildingChanged } />
-        <Field label="Adjective" value={ words.adjective } onChange={ this.adjectiveChanged } />
-        <Field label="Body Part" value={ words.body_part_2 } onChange={ this.bodyPart2Changed } />
-        <Field label="Plural Noun" value={ words.plural_noun_3 } onChange={ this.pluralNoun3Changed } />
-        <Field label="Verb ending in ing" value={ words.ing_verb_2 } onChange={ this.ingVerg2Changed } />
-        <Field label="Number" value={ words.number_2 } onChange={ this.number2Changed } />
-        <Field label="Plural Noun" value={ words.plural_noun_4 } onChange={ this.pluralNoun4Changed } />
-        <Field label="Verb" value={ words.verb } onChange={ this.verbChanged } />
-        <Field label="Language" value={ words.language } onChange={ this.languageChanged } />
-        <Field label="Noun" value={ words.noun } onChange={ this.nounChanged } />
+        <Field label="Body Part" error={ errors.body_part_1 } value={ words.body_part_1 } onChange={ this.bodyPartChanged } />
+        <Field label="Plural Noun" error={ errors.plural_noun_1 } value={ words.plural_noun_1 } onChange={ this.pluralNounChanged } />
+        <Field label="Type of Building" error={ errors.building } value={ words.building } onChange={ this.buildingChanged } />
+        <Field label="Adjective" error={ errors.adjective } value={ words.adjective } onChange={ this.adjectiveChanged } />
+        <Field label="Body Part" error={ errors.body_part_2 } value={ words.body_part_2 } onChange={ this.bodyPart2Changed } />
+        <Field label="Plural Noun" error={ errors.plural_noun_3 } value={ words.plural_noun_3 } onChange={ this.pluralNoun3Changed } />
+        <Field label="Verb ending in ing" error={ errors.ing_verb_2 } value={ words.ing_verb_2 } onChange={ this.ingVerg2Changed } />
+        <Field label="Number" error={ errors.ing_verb_1 } value={ words.number_2 } onChange={ this.number2Changed } />
+        <Field label="Plural Noun" error={ errors.plural_noun_4 } value={ words.plural_noun_4 } onChange={ this.pluralNoun4Changed } />
+        <Field label="Verb" error={ errors.verb } value={ words.verb } onChange={ this.verbChanged } />
+        <Field label="Language" error={ errors.language } value={ words.language } onChange={ this.languageChanged } />
+        <Field label="Noun" error={ errors.noun } value={ words.noun } onChange={ this.nounChanged } />
 
         <button onClick={ this.props.onSave }>Save</button>
       </div>
+    }
+
+    fieldUpdated(name, value) {
+      this.props.onChange(name, value);
     }
 
     number1Changed(e) { this.props.onChange("number_1", e.target.value)}
